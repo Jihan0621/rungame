@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,13 +12,27 @@ public class GameManager : MonoBehaviour
     public int vineCount;
     public int green = 0;
     public int brown = 0;
-    
+
+    bool ENDS = false;
+
     int Hp = 3;
     [SerializeField] List<GameObject> Hp_img = new List<GameObject>();
     private void Update()
     {
         Hpset();
         set_text();
+
+        if (Input.GetKeyDown(KeyCode.H)) 
+        {
+            green = 15;
+            brown = 15;
+        }
+
+        if (green >=15 && brown >= 15 && ENDS == false) 
+        {
+            ENDS = true;
+            SpawnItem.Get2().End();
+        }
     }
 
     private static GameManager _instance { get; set; } = null;
@@ -43,6 +58,7 @@ public class GameManager : MonoBehaviour
                 Hp_img[0].SetActive(false);
                 Hp_img[1].SetActive(false);
                 Hp_img[2].SetActive(false);
+                SceneManager.LoadScene(2);
                 break;
             case 1:
                 Hp_img[1].SetActive(false);
@@ -69,5 +85,9 @@ public class GameManager : MonoBehaviour
     {
         green_text.text = green + "°³";
         brown_text.text = brown + "°³";
+    }
+    public void hit()
+    {
+        Hp--;
     }
 }
