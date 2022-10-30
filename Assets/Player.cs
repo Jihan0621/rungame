@@ -16,13 +16,13 @@ public class Player : MonoBehaviour
     {
         startPosition = transform.position;
         animator = GetComponent<Animator>();
+        animator.SetBool("player", true);
     }
 
     // Update is called once per frame
     void Update()
     {
         Time.timeScale = TimeScale;
-        animator.SetBool("player", true);
         //มกวม
         if (Input.GetKeyDown(KeyCode.Space))
         {

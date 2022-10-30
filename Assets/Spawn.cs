@@ -7,6 +7,8 @@ public class Spawn : MonoBehaviour
     public List<GameObject> MobPool = new List<GameObject>();
     public GameObject[] Mobs;
     public int objCnt = 1;
+    public int minSpawn;
+    public int maxSPawn;
     void Awake()
     {
         for (int i = 0; i < Mobs.Length; i++)
@@ -27,7 +29,7 @@ public class Spawn : MonoBehaviour
         while (true)
         {
             MobPool[DeactiveMob()].SetActive(true);
-            yield return new WaitForSeconds(Random.Range(2f, 3f));
+            yield return new WaitForSeconds(Random.Range(minSpawn, maxSPawn));
         }
     }
 
